@@ -20,7 +20,7 @@ function remarkStripLeadingImage() {
 }
 
 export default defineConfig({
-  site: "https://autotheorieoefenen.com",
+  site: "https://de-theorie-winkel.nl",
   output: "static",
   trailingSlash: "always",
   build: { format: "directory" },
