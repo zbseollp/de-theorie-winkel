@@ -5,121 +5,111 @@ import BlogPostCard from "@components/BlogPostCard.astro";
 import { getRecentPosts } from "@lib/posts";
 import { SITE } from "@lib/site";
 
-const recent = await getRecentPosts(6);
+const recent = await getRecentPosts(8);
 ---
-<BaseLayout title={`${SITE.name} — Gratis studiegids voor je theorie-examen`} description={SITE.description}>
+<BaseLayout title={`${SITE.name} — Studiegids voor je theorie-examen`} description={SITE.description}>
 
-  <!-- Hero: dark slate, professional study feel -->
-  <section class="bg-slate-900 text-white">
-    <Container class="py-20 md:py-28">
-      <div class="max-w-2xl">
-        <div class="inline-flex items-center gap-2 rounded-full bg-blue-600/20 border border-blue-500/30 px-4 py-1.5 text-xs font-bold text-blue-300 mb-6 uppercase tracking-wider">
-          Gratis · geen account nodig
-        </div>
-        <h1 class="text-4xl font-black tracking-tight sm:text-5xl md:text-6xl leading-tight">
-          Alles voor je<br/>
-          <span class="text-blue-400">theorie-examen</span><br/>
-          gratis
+  <!-- Split hero: zwart links / wit rechts -->
+  <section class="grid lg:grid-cols-2 min-h-[420px]">
+    <div class="bg-slate-950 text-white flex items-center px-8 py-16 md:px-16">
+      <div class="max-w-md">
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-slate-500 mb-4">De Theorie Winkel — studiegids</p>
+        <h1 class="text-4xl font-black tracking-tight leading-tight sm:text-5xl">
+          Slaag voor je<br/>
+          <span class="text-blue-400">theorie-examen.</span><br/>
+          Gratis.
         </h1>
-        <p class="mt-6 text-lg text-slate-400 max-w-xl leading-relaxed">
-          Begrijp de verkeersregels, oefen de stof en slaag in één keer voor je CBR theorie-examen. De complete studiegids, gratis beschikbaar.
+        <p class="mt-5 text-slate-400 leading-relaxed text-sm max-w-sm">
+          De complete referentiegids voor je CBR theorie-examen. Gestructureerde uitleg van alle verkeersregels, examentips en meer.
         </p>
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a href="/blog/" class="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-sm font-bold text-white hover:bg-blue-700 transition-colors shadow-lg">
-            Open de studiegids
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <div class="mt-8 flex items-center gap-4">
+          <a href="/blog/" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 text-sm font-bold rounded-lg transition-colors">
+            Open studiegids →
           </a>
-          <a href="/rijbewijs-halen/" class="inline-flex items-center gap-2 rounded-xl bg-white/10 border border-white/20 px-6 py-3 text-sm font-bold text-white hover:bg-white/20 transition-colors">
-            Rijbewijs halen
+          <a href="/theorie-uitleg/" class="text-sm text-slate-400 hover:text-white transition-colors underline underline-offset-4">
+            Theorie uitleg
           </a>
         </div>
-      </div>
-    </Container>
-  </section>
-
-  <!-- Stats band -->
-  <section class="bg-blue-700 text-white">
-    <Container class="py-6">
-      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
-        {[
-          { n: "65", label: "Examensvragen" },
-          { n: "77%", label: "Slagingsdrempel" },
-          { n: "45 min", label: "Examenduur" },
-          { n: "Gratis", label: "Altijd" },
-        ].map(({ n, label }) => (
-          <div>
-            <div class="text-2xl font-black tracking-tight">{n}</div>
-            <div class="text-xs text-blue-200 mt-0.5 font-medium">{label}</div>
-          </div>
-        ))}
-      </div>
-    </Container>
-  </section>
-
-  <Container class="py-(--spacing-section)">
-
-    <!-- 3 stappen -->
-    <div class="mb-16">
-      <h2 class="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl mb-2">Zo gebruik je de studiegids</h2>
-      <p class="text-slate-500 text-sm mb-8">Drie stappen naar een geslaagd theorie-examen</p>
-      <div class="grid gap-5 sm:grid-cols-3">
-        {[
-          { n: "1", title: "Lees de theorie", body: "Begrijp de verkeersregels grondig. Onze artikelen leggen alles helder uit in begrijpelijke taal." },
-          { n: "2", title: "Oefen gevaarherkenning", body: "Het moeilijkste onderdeel van het examen. Oefen met onze uitleg over gevaarlijke situaties." },
-          { n: "3", title: "Haal je examen", body: "Goed voorbereid naar het CBR. Ken de regels, herken gevaar en rijd straks op jouw rijbewijs." },
-        ].map(({ n, title, body }) => (
-          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <div class="w-10 h-10 rounded-xl bg-blue-700 text-white flex items-center justify-center font-black text-lg mb-4">{n}</div>
-            <h3 class="font-bold text-slate-900 mb-2">{title}</h3>
-            <p class="text-sm text-slate-500 leading-relaxed">{body}</p>
-          </div>
-        ))}
       </div>
     </div>
-
-    <!-- Recent posts -->
-    <div class="mb-16">
-      <div class="flex items-center justify-between mb-6">
-        <h2 class="text-2xl font-black tracking-tight text-slate-900">Uit de studiegids</h2>
-        <a href="/blog/" class="text-sm font-semibold text-blue-700 hover:text-blue-800 flex items-center gap-1">
-          Alle artikelen <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    <div class="bg-slate-100 flex items-center justify-center px-8 py-16 md:px-16">
+      <div class="w-full max-w-xs space-y-3">
+        <p class="text-xs font-bold uppercase tracking-[0.15em] text-slate-400 mb-5">Examen feiten</p>
+        {[
+          { label: "Aantal vragen", value: "65" },
+          { label: "Slagingsnorm", value: "77%" },
+          { label: "Examenduur", value: "45 min" },
+          { label: "Certificaat geldig", value: "18 mnd" },
+          { label: "Minimale leeftijd", value: "16½ jaar" },
+        ].map(({ label, value }) => (
+          <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+            <span class="text-sm text-slate-600">{label}</span>
+            <span class="text-sm font-black text-slate-900">{value}</span>
+          </div>
+        ))}
+        <a href="/rijbewijs-halen/" class="block text-center text-xs font-bold text-blue-700 hover:text-blue-800 pt-2 uppercase tracking-wider">
+          Rijbewijs stappenplan →
         </a>
       </div>
-      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {recent.map((p) => <BlogPostCard post={p} />)}
-      </div>
     </div>
+  </section>
 
-    <!-- FAQ -->
-    <div class="mb-16">
-      <h2 class="text-2xl font-black tracking-tight text-slate-900 mb-6">Veelgestelde vragen</h2>
-      <div class="divide-y divide-slate-200 rounded-2xl border border-slate-200 overflow-hidden">
-        {[
-          { q: "Hoeveel vragen heeft het CBR theorie-examen?", a: "Het theorie-examen voor rijbewijs B bestaat uit 65 meerkeuzevragen, verdeeld over drie onderdelen: kennis, inzicht en gevaarherkenning." },
-          { q: "Wat is de slagingsnorm?", a: "Je moet minimaal 77% van de vragen goed hebben. Dat betekent maximaal 15 fouten op 65 vragen." },
-          { q: "Hoe lang duurt het theorie-examen?", a: "Het CBR theorie-examen duurt 45 minuten. Met extra tijd voor mensen met dyslexie of andere beperkingen." },
-          { q: "Hoe bereid ik me het beste voor?", a: "Lees eerst de theorie goed door, oefen daarna veel met examenvragen en besteed extra aandacht aan gevaarherkenning — dat onderdeel levert de meeste fouten op." },
-          { q: "Hoe lang is mijn theorie-certificaat geldig?", a: "Het theorie-certificaat is 18 maanden geldig. Binnen die periode moet je ook je praktijkexamen halen." },
-        ].map(({ q, a }) => (
-          <details class="group bg-white">
-            <summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-4 font-semibold text-slate-900 hover:bg-slate-50 transition-colors list-none">
-              {q}
-              <svg class="shrink-0 transition-transform group-open:rotate-45" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
-            </summary>
-            <p class="px-6 pb-5 text-sm text-slate-600 leading-relaxed">{a}</p>
-          </details>
-        ))}
+  <!-- Register-stijl artikel lijst -->
+  <Container class="py-(--spacing-section)">
+    <div class="flex items-end justify-between mb-6 border-b border-slate-900 pb-3">
+      <div>
+        <p class="text-xs font-bold uppercase tracking-[0.15em] text-slate-400">Studiegids</p>
+        <h2 class="text-2xl font-black text-slate-900 mt-1">Recente artikelen</h2>
       </div>
-    </div>
-
-    <!-- Bottom CTA -->
-    <div class="rounded-2xl bg-slate-900 text-white p-10 text-center">
-      <div class="inline-flex items-center gap-2 rounded-full bg-blue-600/30 px-3 py-1 text-xs font-bold text-blue-300 mb-4">Gratis studiegids</div>
-      <h2 class="text-2xl font-black tracking-tight mb-3">Klaar om te beginnen?</h2>
-      <p class="text-slate-400 text-sm mb-6 max-w-md mx-auto">Lees de theorie, begrijp de regels en slaag in één keer voor je CBR theorie-examen.</p>
-      <a href="/blog/" class="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-8 py-3 text-sm font-bold text-white hover:bg-blue-700 transition-colors">
-        Open de studiegids →
+      <a href="/blog/" class="text-xs font-bold uppercase tracking-wider text-blue-700 hover:text-blue-900">
+        Alles bekijken →
       </a>
     </div>
+    <div class="grid gap-px bg-slate-200 border border-slate-200">
+      {recent.map((p) => <BlogPostCard post={p} />)}
+    </div>
   </Container>
+
+  <!-- Drie kolommen: uitleg, strategie, examen -->
+  <section class="bg-slate-950 text-white">
+    <Container class="py-(--spacing-section)">
+      <p class="text-xs font-bold uppercase tracking-[0.15em] text-slate-500 mb-8">Wat vind je in de studiegids</p>
+      <div class="grid gap-8 sm:grid-cols-3">
+        {[
+          { n: "I", title: "Theorie uitleg", body: "Begrijp de verkeersregels grondig. Voorrang, rijstroken, snelheidslimieten — alles duidelijk uitgelegd.", href: "/theorie-uitleg/" },
+          { n: "II", title: "Examen tips", body: "Hoe haal je het theorie-examen in één keer? Leer de stof slim en besteed extra tijd aan gevaarherkenning.", href: "/blog/" },
+          { n: "III", title: "Rijbewijs halen", body: "Van aanmelden bij het CBR tot je rijbewijs in handen. Het complete stappenplan.", href: "/rijbewijs-halen/" },
+        ].map(({ n, title, body, href }) => (
+          <a href={href} class="group border border-slate-800 hover:border-blue-500 p-6 transition-colors">
+            <div class="text-xs font-bold text-slate-600 mb-3 font-mono">{n}</div>
+            <h3 class="font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">{title}</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">{body}</p>
+          </a>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- FAQ: strak, zwart-wit -->
+  <Container class="max-w-2xl py-(--spacing-section)">
+    <p class="text-xs font-bold uppercase tracking-[0.15em] text-slate-400 mb-2">Vragen</p>
+    <h2 class="text-2xl font-black text-slate-900 mb-8">Veelgesteld</h2>
+    <div class="space-y-0 border-t border-slate-200">
+      {[
+        { q: "Hoeveel vragen heeft het CBR theorie-examen?", a: "65 meerkeuzevragen, verdeeld over kennis, inzicht en gevaarherkenning." },
+        { q: "Wat is de slagingsnorm?", a: "Minimaal 77% goed — maximaal 15 fouten op 65 vragen." },
+        { q: "Hoe lang duurt het examen?", a: "45 minuten. Met extra tijd indien van toepassing (bijv. dyslexie)." },
+        { q: "Hoe lang is mijn certificaat geldig?", a: "18 maanden. Binnen die periode moet je ook het praktijkexamen halen." },
+      ].map(({ q, a }) => (
+        <details class="group border-b border-slate-200 py-4">
+          <summary class="flex cursor-pointer items-center justify-between text-sm font-semibold text-slate-900 list-none gap-4">
+            {q}
+            <span class="text-lg font-light text-slate-400 group-open:rotate-45 transition-transform shrink-0">+</span>
+          </summary>
+          <p class="mt-3 text-sm text-slate-500 leading-relaxed">{a}</p>
+        </details>
+      ))}
+    </div>
+  </Container>
+
 </BaseLayout>
