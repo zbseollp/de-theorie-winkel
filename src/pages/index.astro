@@ -9,52 +9,75 @@ const recent = await getRecentPosts(8);
 ---
 <BaseLayout title={`${SITE.name} — Studiegids voor je theorie-examen`} description={SITE.description}>
 
-  <!-- Split hero: zwart links / wit rechts -->
-  <section class="grid lg:grid-cols-2 min-h-[420px]">
+  <!-- Split hero: zwart links / feiten rechts -->
+  <section class="grid lg:grid-cols-2 min-h-[440px]">
     <div class="bg-slate-950 text-white flex items-center px-8 py-16 md:px-16">
       <div class="max-w-md">
-        <p class="text-xs font-bold uppercase tracking-[0.2em] text-slate-500 mb-4">De Theorie Winkel — studiegids</p>
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-slate-500 mb-4">Gratis studiegids · geen account nodig</p>
         <h1 class="text-4xl font-black tracking-tight leading-tight sm:text-5xl">
           Slaag voor je<br/>
           <span class="text-blue-400">theorie-examen.</span><br/>
           Gratis.
         </h1>
         <p class="mt-5 text-slate-400 leading-relaxed text-sm max-w-sm">
-          De complete referentiegids voor je CBR theorie-examen. Gestructureerde uitleg van alle verkeersregels, examentips en meer.
+          De complete referentiegids voor je CBR theorie-examen. Gestructureerde uitleg van alle verkeersregels, examentips en meer — zonder aanmelden.
         </p>
-        <div class="mt-8 flex items-center gap-4">
-          <a href="/blog/" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 text-sm font-bold rounded-lg transition-colors">
+        <div class="mt-8 flex items-center gap-4 flex-wrap">
+          <a href="/blog/" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 text-sm font-bold transition-colors">
             Open studiegids →
           </a>
-          <a href="/theorie-uitleg/" class="text-sm text-slate-400 hover:text-white transition-colors underline underline-offset-4">
-            Theorie uitleg
+          <a href="/rijbewijs-halen/" class="text-sm text-slate-400 hover:text-white transition-colors underline underline-offset-4">
+            Rijbewijs stappenplan
           </a>
         </div>
       </div>
     </div>
     <div class="bg-slate-100 flex items-center justify-center px-8 py-16 md:px-16">
-      <div class="w-full max-w-xs space-y-3">
-        <p class="text-xs font-bold uppercase tracking-[0.15em] text-slate-400 mb-5">Examen feiten</p>
+      <div class="w-full max-w-xs space-y-0">
+        <p class="text-xs font-bold uppercase tracking-[0.15em] text-slate-400 mb-5">CBR Examen feiten</p>
         {[
           { label: "Aantal vragen", value: "65" },
           { label: "Slagingsnorm", value: "77%" },
+          { label: "Max. fouten", value: "15" },
           { label: "Examenduur", value: "45 min" },
           { label: "Certificaat geldig", value: "18 mnd" },
           { label: "Minimale leeftijd", value: "16½ jaar" },
+          { label: "Kosten examen", value: "€ 42,-" },
         ].map(({ label, value }) => (
-          <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+          <div class="flex items-center justify-between border-b border-slate-200 py-3">
             <span class="text-sm text-slate-600">{label}</span>
             <span class="text-sm font-black text-slate-900">{value}</span>
           </div>
         ))}
-        <a href="/rijbewijs-halen/" class="block text-center text-xs font-bold text-blue-700 hover:text-blue-800 pt-2 uppercase tracking-wider">
-          Rijbewijs stappenplan →
+        <a href="/rijbewijs-halen/" class="block text-center text-xs font-bold text-blue-700 hover:text-blue-800 pt-4 uppercase tracking-wider">
+          Complete kostenoverzicht →
         </a>
       </div>
     </div>
   </section>
 
-  <!-- Register-stijl artikel lijst -->
+  <!-- Drie stappen -->
+  <section class="border-b border-slate-200">
+    <Container class="py-(--spacing-section)">
+      <p class="text-xs font-bold uppercase tracking-[0.15em] text-slate-400 mb-2">Hoe gebruik je de studiegids</p>
+      <h2 class="text-2xl font-black text-slate-900 mb-8">Drie stappen naar je rijbewijs</h2>
+      <div class="grid gap-0 sm:grid-cols-3 border border-slate-200">
+        {[
+          { n: "01", title: "Lees de theorie", body: "Begrijp de verkeersregels grondig. Onze artikelen leggen alles helder uit — van voorrangsregels tot rijbaanmarkering. Begrip werkt beter dan stampen." },
+          { n: "02", title: "Oefen gevaarherkenning", body: "Het moeilijkste onderdeel van het examen. Lees onze uitleg over gevaarlijke situaties en leer herkennen wat examinatoren zoeken in je reactie." },
+          { n: "03", title: "Doe het examen", body: "Goed voorbereid naar het CBR. Ken de regels, herken gevaar en gebruik onze examenstrategie om ook onder tijdsdruk goed te presteren." },
+        ].map(({ n, title, body }) => (
+          <div class="border-b sm:border-b-0 sm:border-r border-slate-200 p-7 last:border-0">
+            <div class="text-3xl font-black text-slate-200 mb-4 font-mono">{n}</div>
+            <h3 class="font-black text-slate-900 mb-3">{title}</h3>
+            <p class="text-sm text-slate-500 leading-relaxed">{body}</p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- Artikel register -->
   <Container class="py-(--spacing-section)">
     <div class="flex items-end justify-between mb-6 border-b border-slate-900 pb-3">
       <div>
@@ -62,7 +85,7 @@ const recent = await getRecentPosts(8);
         <h2 class="text-2xl font-black text-slate-900 mt-1">Recente artikelen</h2>
       </div>
       <a href="/blog/" class="text-xs font-bold uppercase tracking-wider text-blue-700 hover:text-blue-900">
-        Alles bekijken →
+        Alle artikelen →
       </a>
     </div>
     <div class="grid gap-px bg-slate-200 border border-slate-200">
@@ -70,46 +93,63 @@ const recent = await getRecentPosts(8);
     </div>
   </Container>
 
-  <!-- Drie kolommen: uitleg, strategie, examen -->
+  <!-- Wat vind je in de studiegids -->
   <section class="bg-slate-950 text-white">
     <Container class="py-(--spacing-section)">
-      <p class="text-xs font-bold uppercase tracking-[0.15em] text-slate-500 mb-8">Wat vind je in de studiegids</p>
-      <div class="grid gap-8 sm:grid-cols-3">
+      <p class="text-xs font-bold uppercase tracking-[0.15em] text-slate-500 mb-2">Inhoud van de studiegids</p>
+      <h2 class="text-2xl font-black text-white mb-8">Alles voor je theorie-examen</h2>
+      <div class="grid gap-0 sm:grid-cols-3 border border-slate-800">
         {[
-          { n: "I", title: "Theorie uitleg", body: "Begrijp de verkeersregels grondig. Voorrang, rijstroken, snelheidslimieten — alles duidelijk uitgelegd.", href: "/theorie-uitleg/" },
-          { n: "II", title: "Examen tips", body: "Hoe haal je het theorie-examen in één keer? Leer de stof slim en besteed extra tijd aan gevaarherkenning.", href: "/blog/" },
-          { n: "III", title: "Rijbewijs halen", body: "Van aanmelden bij het CBR tot je rijbewijs in handen. Het complete stappenplan.", href: "/rijbewijs-halen/" },
+          { n: "I", title: "Theorie uitleg", body: "Begrijp de verkeersregels grondig. Voorrang, rijstroken, snelheidslimieten, verkeersborden — alles duidelijk uitgelegd in begrijpelijke taal.", href: "/theorie-uitleg/" },
+          { n: "II", title: "Examen strategie", body: "Hoe haal je het CBR theorie-examen in één keer? Tijdmanagement, omgaan met twijfelgevallen en de beste voorbereiding voor gevaarherkenning.", href: "/blog/" },
+          { n: "III", title: "Rijbewijs halen", body: "Van CBR-code aanvragen tot je rijbewijs in handen. Het complete stappenplan inclusief kosten, rijschool kiezen en praktijkexamen.", href: "/rijbewijs-halen/" },
         ].map(({ n, title, body, href }) => (
-          <a href={href} class="group border border-slate-800 hover:border-blue-500 p-6 transition-colors">
-            <div class="text-xs font-bold text-slate-600 mb-3 font-mono">{n}</div>
-            <h3 class="font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">{title}</h3>
+          <a href={href} class="group border-b sm:border-b-0 sm:border-r border-slate-800 hover:border-blue-600 p-7 transition-colors last:border-0">
+            <div class="text-xs font-bold text-slate-600 mb-4 font-mono tracking-widest">{n}</div>
+            <h3 class="font-black text-white mb-3 group-hover:text-blue-400 transition-colors">{title}</h3>
             <p class="text-sm text-slate-400 leading-relaxed">{body}</p>
+            <div class="mt-4 text-xs font-bold text-blue-600 uppercase tracking-wider group-hover:text-blue-400">Lees meer →</div>
           </a>
         ))}
       </div>
     </Container>
   </section>
 
-  <!-- FAQ: strak, zwart-wit -->
+  <!-- FAQ -->
   <Container class="max-w-2xl py-(--spacing-section)">
     <p class="text-xs font-bold uppercase tracking-[0.15em] text-slate-400 mb-2">Vragen</p>
     <h2 class="text-2xl font-black text-slate-900 mb-8">Veelgesteld</h2>
     <div class="space-y-0 border-t border-slate-200">
       {[
-        { q: "Hoeveel vragen heeft het CBR theorie-examen?", a: "65 meerkeuzevragen, verdeeld over kennis, inzicht en gevaarherkenning." },
-        { q: "Wat is de slagingsnorm?", a: "Minimaal 77% goed — maximaal 15 fouten op 65 vragen." },
-        { q: "Hoe lang duurt het examen?", a: "45 minuten. Met extra tijd indien van toepassing (bijv. dyslexie)." },
-        { q: "Hoe lang is mijn certificaat geldig?", a: "18 maanden. Binnen die periode moet je ook het praktijkexamen halen." },
+        { q: "Hoeveel vragen heeft het CBR theorie-examen?", a: "Het theorie-examen voor rijbewijs B bestaat uit 65 meerkeuzevragen, verdeeld over drie onderdelen: kennis, inzicht en gevaarherkenning." },
+        { q: "Wat is de slagingsnorm?", a: "Minimaal 77% goed — dat betekent maximaal 15 fouten op 65 vragen. Elk onderdeel heeft ook een minimum." },
+        { q: "Hoe lang duurt het examen?", a: "45 minuten. Met extra tijd indien van toepassing (bijv. dyslexieverklaring). Gevaarherkenning is aparte tijdsbewaking." },
+        { q: "Hoe bereid ik me het beste voor?", a: "Lees eerst alle theorie, oefen daarna met examenvragen en besteed extra aandacht aan gevaarherkenning. Dat onderdeel levert de meeste fouten op." },
+        { q: "Hoe lang is mijn theorie-certificaat geldig?", a: "18 maanden. Binnen die periode moet je ook het praktijkexamen halen, anders vervalt het en moet je opnieuw theorie-examen doen." },
       ].map(({ q, a }) => (
         <details class="group border-b border-slate-200 py-4">
           <summary class="flex cursor-pointer items-center justify-between text-sm font-semibold text-slate-900 list-none gap-4">
             {q}
-            <span class="text-lg font-light text-slate-400 group-open:rotate-45 transition-transform shrink-0">+</span>
+            <span class="text-xl font-light text-slate-400 group-open:rotate-45 transition-transform shrink-0 leading-none">+</span>
           </summary>
           <p class="mt-3 text-sm text-slate-500 leading-relaxed">{a}</p>
         </details>
       ))}
     </div>
   </Container>
+
+  <!-- Bottom CTA -->
+  <section class="bg-blue-700 text-white">
+    <Container class="py-14 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div>
+        <p class="text-xs font-bold uppercase tracking-[0.15em] text-blue-300 mb-1">Gratis · geen account</p>
+        <h2 class="text-2xl font-black">Klaar om te beginnen?</h2>
+        <p class="text-blue-200 text-sm mt-1">Lees de theorie, begrijp de regels, slaag in één keer.</p>
+      </div>
+      <a href="/blog/" class="shrink-0 inline-flex items-center gap-2 bg-white text-blue-800 font-black px-7 py-3 hover:bg-blue-50 transition-colors text-sm">
+        Open de studiegids →
+      </a>
+    </Container>
+  </section>
 
 </BaseLayout>
