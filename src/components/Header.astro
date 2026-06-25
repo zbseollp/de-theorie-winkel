@@ -6,12 +6,16 @@ const isActive = (href: string) => href === "/" ? path === "/" : path.startsWith
 ---
 <header
   data-header
-  class="sticky top-0 z-50 border-b border-transparent transition-colors duration-300"
+  class="sticky top-0 z-50 border-b border-transparent bg-white transition-colors duration-300"
 >
   <Container class="flex h-16 items-center justify-between md:h-20">
-    <a href="/" class="flex items-center gap-2 font-display text-xl font-extrabold tracking-tight text-slate-900">
-      <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600 text-white">A</span>
-      <span>Theorie<span class="text-brand-600">Winkel</span></span>
+    <a href="/" class="flex items-center gap-2.5 group">
+      <div class="w-9 h-9 flex items-center justify-center shrink-0 rounded-lg bg-blue-700 group-hover:bg-blue-800 transition-colors">
+        <span class="text-white font-black text-base leading-none">W</span>
+      </div>
+      <span class="font-black text-slate-900 text-base leading-tight hidden sm:block tracking-tight">
+        De Theorie<span class="text-blue-700">Winkel</span>
+      </span>
     </a>
 
     <nav class="hidden items-center gap-1 lg:flex" aria-label="Hoofdmenu">
@@ -19,26 +23,31 @@ const isActive = (href: string) => href === "/" ? path === "/" : path.startsWith
         <a
           href={item.href}
           class:list={[
-            "rounded-lg px-3 py-2 text-sm font-medium transition hover:text-brand-700",
-            isActive(item.href) ? "text-brand-700" : "text-slate-700",
+            "rounded-lg px-3 py-2 text-sm font-medium transition hover:text-blue-700",
+            isActive(item.href) ? "text-blue-700" : "text-slate-700",
           ]}
         >{item.label}</a>
       ))}
     </nav>
 
-    <button
-      data-menu-toggle
-      class="inline-flex items-center justify-center rounded-lg p-2 text-slate-700 lg:hidden"
-      aria-label="Menu openen" aria-expanded="false"
-    >
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-    </button>
+    <div class="flex items-center gap-3">
+      <a href="/blog/" class="hidden sm:inline-flex items-center gap-1.5 rounded-lg bg-blue-700 px-4 py-2 text-sm font-bold text-white hover:bg-blue-800 transition-colors">
+        Studiegids
+      </a>
+      <button
+        data-menu-toggle
+        class="inline-flex items-center justify-center rounded-lg p-2 text-slate-700 lg:hidden"
+        aria-label="Menu openen" aria-expanded="false"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
   </Container>
 
   <div data-mobile-menu class="hidden border-t border-slate-200 bg-white lg:hidden">
     <Container class="flex flex-col py-3">
       {SITE.nav.map((item) => (
-        <a href={item.href} class="rounded-lg px-3 py-2 text-base font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-700">{item.label}</a>
+        <a href={item.href} class="rounded-lg px-3 py-2 text-base font-medium text-slate-700 hover:bg-blue-50 hover:text-blue-700">{item.label}</a>
       ))}
     </Container>
   </div>
@@ -47,8 +56,8 @@ const isActive = (href: string) => href === "/" ? path === "/" : path.startsWith
 <script>
   const header = document.querySelector("[data-header]");
   const onScroll = () => {
-    if (window.scrollY > 8) header?.classList.add("bg-white/90", "backdrop-blur", "border-slate-200", "shadow-sm");
-    else header?.classList.remove("bg-white/90", "backdrop-blur", "border-slate-200", "shadow-sm");
+    if (window.scrollY > 8) header?.classList.add("shadow-sm", "border-slate-200");
+    else header?.classList.remove("shadow-sm", "border-slate-200");
   };
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });

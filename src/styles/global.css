@@ -12,19 +12,18 @@
 }
 
 @theme {
-  /* Brand — autotheorieoefenen orange (#F65900), tuned to a full scale.
-     brand-700 is the AA-safe step for white text / CTAs. */
-  --color-brand-50: #fff4ec;
-  --color-brand-100: #ffe6d3;
-  --color-brand-200: #ffc9a6;
-  --color-brand-300: #ffa46e;
-  --color-brand-400: #fd7a36;
-  --color-brand-500: #f65900;
-  --color-brand-600: #db4d00;
-  --color-brand-700: #b03b06;
-  --color-brand-800: #8c300c;
-  --color-brand-900: #722a0e;
-  --color-brand-950: #3e1304;
+  /* Brand — navy blue, trustworthy study-guide feel */
+  --color-brand-50: #eff6ff;
+  --color-brand-100: #dbeafe;
+  --color-brand-200: #bfdbfe;
+  --color-brand-300: #93c5fd;
+  --color-brand-400: #60a5fa;
+  --color-brand-500: #3b82f6;
+  --color-brand-600: #2563eb;
+  --color-brand-700: #1e40af;
+  --color-brand-800: #1e3a8a;
+  --color-brand-900: #1e3163;
+  --color-brand-950: #172554;
 
   /* Trust accent (CBR/road-sign blue) for secondary highlights */
   --color-accent-50: #eff6ff;

@@ -1,123 +1,125 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Container from "@components/Container.astro";
-import Button from "@components/Button.astro";
 import BlogPostCard from "@components/BlogPostCard.astro";
 import { getRecentPosts } from "@lib/posts";
 import { SITE } from "@lib/site";
-import signsRaw from "../data/signs.json";
 
 const recent = await getRecentPosts(6);
-const heroSigns = (signsRaw as { id: string; name: string }[])
-  .filter((s) => s.name && s.name.toLowerCase() !== "bord").slice(0, 9);
-
-const topics = [
-  { title: "Verkeersborden oefenen", desc: "Test in 20 vragen of jij alle borden kent.", href: "/verkeersborden-oefenen/", cta: "Start de quiz" },
-  { title: "Alle verkeersborden", desc: "Compleet overzicht van alle Nederlandse borden.", href: "/alle-verkeersborden/", cta: "Bekijk overzicht" },
-  { title: "Voorrangsregels", desc: "Alles over voorrang, kruispunten en haaientanden.", href: "/voorrangsregels/", cta: "Lees uitleg" },
-  { title: "Motor theorie", desc: "Oefen specifiek voor je motortheorie-examen.", href: "/motor-theorie/", cta: "Naar motor theorie" },
-];
-
-const stats = [
-  { value: "160", label: "Verkeersborden" },
-  { value: "100%", label: "Gratis oefenen" },
-  { value: "161.632+", label: "Toetsen gemaakt" },
-];
-
-const jsonld = {
-  "@context": "https://schema.org",
-  "@graph": [
-    { "@type": "Organization", "@id": `${SITE.url}/#org`, name: SITE.name, url: SITE.url },
-    { "@type": "WebSite", "@id": `${SITE.url}/#website`, url: SITE.url, name: SITE.name, publisher: { "@id": `${SITE.url}/#org` }, inLanguage: "nl-NL" },
-  ],
-};
 ---
-<BaseLayout
-  title="Theorie examen oefenen? Gratis & online | Autotheorieoefenen"
-  description={SITE.description}
->
-  <script type="application/ld+json" set:html={JSON.stringify(jsonld)} is:inline />
+<BaseLayout title={`${SITE.name} — Gratis studiegids voor je theorie-examen`} description={SITE.description}>
 
-  <!-- Hero -->
-  <section class="relative overflow-hidden -mt-16 pt-16 md:-mt-20 md:pt-20 bg-[linear-gradient(180deg,var(--color-brand-50)_0%,#fff_72%)]">
-    <Container class="grid items-center gap-10 py-(--spacing-section) lg:grid-cols-2">
-      <div>
-        <span class="inline-flex items-center rounded-full bg-brand-100 px-3 py-1 text-sm font-semibold text-brand-800">Gratis · CBR theorie 2026</span>
-        <h1 class="mt-5 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
-          Theorie-examen oefenen?<br /><span class="text-brand-600">Wij helpen je slagen.</span>
+  <!-- Hero: dark slate, professional study feel -->
+  <section class="bg-slate-900 text-white">
+    <Container class="py-20 md:py-28">
+      <div class="max-w-2xl">
+        <div class="inline-flex items-center gap-2 rounded-full bg-blue-600/20 border border-blue-500/30 px-4 py-1.5 text-xs font-bold text-blue-300 mb-6 uppercase tracking-wider">
+          Gratis · geen account nodig
+        </div>
+        <h1 class="text-4xl font-black tracking-tight sm:text-5xl md:text-6xl leading-tight">
+          Alles voor je<br/>
+          <span class="text-blue-400">theorie-examen</span><br/>
+          gratis
         </h1>
-        <p class="mt-5 max-w-xl text-lg text-slate-600">
-          Oefen gratis met verkeersborden, voorrangsregels en alle onderwerpen van het
-          CBR theorie-examen. Direct beginnen, geen account nodig.
+        <p class="mt-6 text-lg text-slate-400 max-w-xl leading-relaxed">
+          Begrijp de verkeersregels, oefen de stof en slaag in één keer voor je CBR theorie-examen. De complete studiegids, gratis beschikbaar.
         </p>
         <div class="mt-8 flex flex-wrap gap-3">
-          <Button href="/verkeersborden-oefenen/" variant="primary">Start met oefenen</Button>
-          <Button href="/alle-verkeersborden/" variant="secondary">Bekijk alle borden</Button>
-        </div>
-      </div>
-      <div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-xl">
-        <div class="grid grid-cols-3 gap-3">
-          {heroSigns.map((s, i) => (
-            <img src={`/assets/images/signs/${s.id}.png`} alt={s.name}
-                 width="120" height="120" loading={i < 3 ? "eager" : "lazy"} decoding="async"
-                 class="aspect-square w-full rounded-lg border border-slate-100 bg-white object-contain p-1.5" />
-          ))}
-        </div>
-      </div>
-    </Container>
-  </section>
-
-  <!-- Stats -->
-  <section class="border-y border-slate-200 bg-slate-50">
-    <Container class="grid grid-cols-3 gap-4 py-8 text-center">
-      {stats.map((s) => (
-        <div>
-          <div class="text-2xl font-extrabold text-brand-700 sm:text-3xl">{s.value}</div>
-          <div class="mt-1 text-sm text-slate-600">{s.label}</div>
-        </div>
-      ))}
-    </Container>
-  </section>
-
-  <!-- Featured topics -->
-  <section>
-    <Container class="py-(--spacing-section)">
-      <h2 class="text-3xl font-extrabold tracking-tight text-slate-900">Waar wil je mee oefenen?</h2>
-      <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {topics.map((t) => (
-          <a href={t.href} class="group flex flex-col rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-lg">
-            <h3 class="text-lg font-bold text-slate-900 group-hover:text-brand-700">{t.title}</h3>
-            <p class="mt-2 flex-1 text-sm text-slate-600">{t.desc}</p>
-            <span class="mt-4 text-sm font-semibold text-brand-700">{t.cta} →</span>
+          <a href="/blog/" class="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-sm font-bold text-white hover:bg-blue-700 transition-colors shadow-lg">
+            Open de studiegids
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
+          <a href="/rijbewijs-halen/" class="inline-flex items-center gap-2 rounded-xl bg-white/10 border border-white/20 px-6 py-3 text-sm font-bold text-white hover:bg-white/20 transition-colors">
+            Rijbewijs halen
+          </a>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Stats band -->
+  <section class="bg-blue-700 text-white">
+    <Container class="py-6">
+      <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+        {[
+          { n: "65", label: "Examensvragen" },
+          { n: "77%", label: "Slagingsdrempel" },
+          { n: "45 min", label: "Examenduur" },
+          { n: "Gratis", label: "Altijd" },
+        ].map(({ n, label }) => (
+          <div>
+            <div class="text-2xl font-black tracking-tight">{n}</div>
+            <div class="text-xs text-blue-200 mt-0.5 font-medium">{label}</div>
+          </div>
         ))}
       </div>
     </Container>
   </section>
 
-  <!-- CTA band -->
-  <section class="bg-brand-700">
-    <Container class="flex flex-col items-center justify-between gap-5 py-12 text-center sm:flex-row sm:text-left">
-      <div>
-        <h2 class="text-2xl font-extrabold text-white">Klaar om te oefenen?</h2>
-        <p class="mt-1 text-brand-50">Begin nu gratis met de verkeersbordenquiz — 20 vragen.</p>
-      </div>
-      <a href="/verkeersborden-oefenen/" class="inline-flex shrink-0 items-center rounded-xl bg-white px-6 py-3 font-semibold text-brand-700 transition hover:bg-brand-50">Start de quiz</a>
-    </Container>
-  </section>
+  <Container class="py-(--spacing-section)">
 
-  <!-- Latest from the blog -->
-  {recent.length > 0 && (
-    <section>
-      <Container class="py-(--spacing-section)">
-        <div class="flex items-end justify-between">
-          <h2 class="text-3xl font-extrabold tracking-tight text-slate-900">Laatste uit de blog</h2>
-          <a href="/blog/" class="text-sm font-semibold text-brand-700 hover:underline">Alle artikelen →</a>
-        </div>
-        <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {recent.map((p, i) => <BlogPostCard post={p} eager={i === 0} />)}
-        </div>
-      </Container>
-    </section>
-  )}
+    <!-- 3 stappen -->
+    <div class="mb-16">
+      <h2 class="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl mb-2">Zo gebruik je de studiegids</h2>
+      <p class="text-slate-500 text-sm mb-8">Drie stappen naar een geslaagd theorie-examen</p>
+      <div class="grid gap-5 sm:grid-cols-3">
+        {[
+          { n: "1", title: "Lees de theorie", body: "Begrijp de verkeersregels grondig. Onze artikelen leggen alles helder uit in begrijpelijke taal." },
+          { n: "2", title: "Oefen gevaarherkenning", body: "Het moeilijkste onderdeel van het examen. Oefen met onze uitleg over gevaarlijke situaties." },
+          { n: "3", title: "Haal je examen", body: "Goed voorbereid naar het CBR. Ken de regels, herken gevaar en rijd straks op jouw rijbewijs." },
+        ].map(({ n, title, body }) => (
+          <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <div class="w-10 h-10 rounded-xl bg-blue-700 text-white flex items-center justify-center font-black text-lg mb-4">{n}</div>
+            <h3 class="font-bold text-slate-900 mb-2">{title}</h3>
+            <p class="text-sm text-slate-500 leading-relaxed">{body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Recent posts -->
+    <div class="mb-16">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-2xl font-black tracking-tight text-slate-900">Uit de studiegids</h2>
+        <a href="/blog/" class="text-sm font-semibold text-blue-700 hover:text-blue-800 flex items-center gap-1">
+          Alle artikelen <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {recent.map((p) => <BlogPostCard post={p} />)}
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="mb-16">
+      <h2 class="text-2xl font-black tracking-tight text-slate-900 mb-6">Veelgestelde vragen</h2>
+      <div class="divide-y divide-slate-200 rounded-2xl border border-slate-200 overflow-hidden">
+        {[
+          { q: "Hoeveel vragen heeft het CBR theorie-examen?", a: "Het theorie-examen voor rijbewijs B bestaat uit 65 meerkeuzevragen, verdeeld over drie onderdelen: kennis, inzicht en gevaarherkenning." },
+          { q: "Wat is de slagingsnorm?", a: "Je moet minimaal 77% van de vragen goed hebben. Dat betekent maximaal 15 fouten op 65 vragen." },
+          { q: "Hoe lang duurt het theorie-examen?", a: "Het CBR theorie-examen duurt 45 minuten. Met extra tijd voor mensen met dyslexie of andere beperkingen." },
+          { q: "Hoe bereid ik me het beste voor?", a: "Lees eerst de theorie goed door, oefen daarna veel met examenvragen en besteed extra aandacht aan gevaarherkenning — dat onderdeel levert de meeste fouten op." },
+          { q: "Hoe lang is mijn theorie-certificaat geldig?", a: "Het theorie-certificaat is 18 maanden geldig. Binnen die periode moet je ook je praktijkexamen halen." },
+        ].map(({ q, a }) => (
+          <details class="group bg-white">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-4 font-semibold text-slate-900 hover:bg-slate-50 transition-colors list-none">
+              {q}
+              <svg class="shrink-0 transition-transform group-open:rotate-45" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+            </summary>
+            <p class="px-6 pb-5 text-sm text-slate-600 leading-relaxed">{a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="rounded-2xl bg-slate-900 text-white p-10 text-center">
+      <div class="inline-flex items-center gap-2 rounded-full bg-blue-600/30 px-3 py-1 text-xs font-bold text-blue-300 mb-4">Gratis studiegids</div>
+      <h2 class="text-2xl font-black tracking-tight mb-3">Klaar om te beginnen?</h2>
+      <p class="text-slate-400 text-sm mb-6 max-w-md mx-auto">Lees de theorie, begrijp de regels en slaag in één keer voor je CBR theorie-examen.</p>
+      <a href="/blog/" class="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-8 py-3 text-sm font-bold text-white hover:bg-blue-700 transition-colors">
+        Open de studiegids →
+      </a>
+    </div>
+  </Container>
 </BaseLayout>
